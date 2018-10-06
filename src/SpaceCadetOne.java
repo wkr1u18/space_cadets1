@@ -16,20 +16,23 @@ public class SpaceCadetOne {
         BufferedReader urlInput = new BufferedReader(new InputStreamReader(personUrl.openStream()));
         String inputLine;
         String searchedPattern = new String("property=\"name\">");
-        int startPosition = -1, endPosition=-1;
+        int startPosition = -1, endPosition;
         while((inputLine = urlInput.readLine())!=null) {
             startPosition = inputLine.indexOf(searchedPattern);
             if (startPosition>0) {
                 endPosition = inputLine.indexOf('<', startPosition);
                 System.out.println(inputLine.substring(startPosition+searchedPattern.length(),endPosition));
+                urlInput.close();
+                textInput.close();
                 System.exit(0);
             }
         }
         System.out.println("Could not find this person in ecs database");
+        urlInput.close();
+        textInput.close();
         System.exit(0);
 
 
-        urlInput.close();
-        textInput.close();
+
     }
 }
